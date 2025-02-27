@@ -12,12 +12,13 @@ import Filter from "../../product/[productId]/components/filter";
 export const revalidate = 0;
 
 interface CategoryPageProps {
-  params: { categoryId: string };
-  searchParams: {
+  params: Promise<{ categoryId: string }>;
+  searchParams: Promise<{
     colorId: string;
     sizeId: string;
-  };
+  }>;
 }
+
 const CategoryPage: React.FC<CategoryPageProps> = async ({
   params,
   searchParams,
@@ -25,8 +26,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const { categoryId } = await params;
   const sizes = await getSizes();
   const colors = await getColors();
-  const { colorId } = await searchParams;
-  const { sizeId } = await searchParams;
+  const { colorId, sizeId } = await searchParams;
 
   const products = await getProducts({
     categoryId: categoryId,
