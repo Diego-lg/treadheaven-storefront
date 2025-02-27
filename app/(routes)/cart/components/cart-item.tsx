@@ -1,11 +1,9 @@
 "use client";
 import Image from "next/image";
-import { toast } from "react-hot-toast";
 import { X } from "lucide-react";
 
 import IconButton from "@/components/ui/icon-button";
 import useCart from "@/hooks/use-cart";
-import { useEffect, useState } from "react";
 
 import Currency from "@/components/ui/currency";
 import { Product } from "@/types";
