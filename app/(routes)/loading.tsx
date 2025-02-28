@@ -159,12 +159,13 @@ export default function Loading() {
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center bg-transparent">
       {isClient ? (
-        <div className="w-full h-[80vh] flex items-center justify-center">
+        <div className="w-full h-[60vh] md:h-[80vh] flex items-center justify-center px-4 md:px-0">
           <PreloadModel />
-          <div className="w-full max-w-[600px] h-full">
+          <div className="w-full max-w-[350px] sm:max-w-[450px] md:max-w-[600px] h-full">
             <Canvas
-              camera={{ position: [0, 1.4, 3.2], fov: 50 }}
+              camera={{ position: [0, 1.4, 3.2], fov: 45 }}
               className="w-full h-full"
+              dpr={[1, 2]} // Limit pixel ratio for better performance
             >
               <Suspense fallback={null}>
                 <Scene />
@@ -183,7 +184,10 @@ export default function Loading() {
       ) : (
         <SimpleFallback />
       )}
-      <div className="text-2xl mt-4 absolute bottom-10" aria-live="polite">
+      <div
+        className="text-lg sm:text-xl md:text-2xl mt-4 absolute bottom-5 md:bottom-10"
+        aria-live="polite"
+      >
         Loading...
       </div>
     </div>
