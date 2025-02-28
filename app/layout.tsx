@@ -5,7 +5,7 @@ import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import ModalProvider from "@/providers/modal-provider";
 import ToastProvider from "@/providers/toast-provider";
-import { Analytics } from "@vercel/analytics/react";
+
 const font = Urbanist({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Store",
@@ -25,7 +25,6 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
-        <Analytics />
       </body>
     </html>
   );
