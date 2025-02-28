@@ -163,7 +163,7 @@ export default function Loading() {
           <PreloadModel />
           <div className="w-full max-w-[350px] sm:max-w-[450px] md:max-w-[600px] h-full">
             <Canvas
-              camera={{ position: [0, 1.4, 3.2], fov: 45 }}
+              camera={{ position: [0, 1.4, 3.2], fov: 100 }}
               className="w-full h-full"
               dpr={[1, 2]} // Limit pixel ratio for better performance
             >
