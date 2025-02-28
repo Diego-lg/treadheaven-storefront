@@ -153,7 +153,7 @@ export default function Loading() {
         <div className="w-full h-[80vh] flex items-center justify-center">
           <div className="w-full max-w-[600px] h-full">
             <Canvas
-              camera={{ position: [0, 1.4, 3.2], fov: 50 }}
+              camera={{ position: [0, 1.4, 3.2], fov: 100 }}
               className="w-full h-full"
             >
               <Suspense fallback={null}>
