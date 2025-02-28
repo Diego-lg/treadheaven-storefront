@@ -1,9 +1,8 @@
 "use client";
 
 import { Suspense, useRef, useEffect, useMemo, useState } from "react";
-import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 
 // Preload the model
@@ -12,7 +11,7 @@ const MODEL_URL =
 useGLTF.preload(MODEL_URL);
 
 function EarthIsland() {
-  const meshRef = useRef();
+  const meshRef = useRef<THREE.Mesh>(null);
   const radius = 1;
   // Reduce geometry complexity
   const widthSegments = 32; // Reduced from 128
@@ -28,8 +27,7 @@ function EarthIsland() {
   return (
     <mesh ref={meshRef}>
       <sphereGeometry args={[radius, widthSegments, heightSegments]} />
-      <meshBasicMaterial color="#228B22" />{" "}
-      {/* Using basic material instead of standard */}
+      <meshBasicMaterial color="#228B22" />
     </mesh>
   );
 }
@@ -37,7 +35,7 @@ function EarthIsland() {
 function Trees() {
   // Reduce number of trees for better performance
   const treePositions = useMemo(() => {
-    const positions = [];
+    const positions: [number, number, number][] = [];
     for (let i = 0; i < 30; i++) {
       // Reduced from 100
       const theta = Math.random() * Math.PI;
@@ -45,7 +43,7 @@ function Trees() {
       const x = -Math.cos(phi) * Math.sin(theta);
       const y = Math.cos(theta);
       const z = Math.sin(phi) * Math.sin(theta);
-      positions.push([x, y, z]);
+      positions.push([x, y, z] as [number, number, number]);
     }
     return positions;
   }, []);
@@ -55,37 +53,32 @@ function Trees() {
       {treePositions.map((position, index) => (
         <group key={index} position={position}>
           <mesh position={[0, 0.05, 0]}>
-            <cylinderGeometry args={[0.01, 0.01, 0.1, 6]} />{" "}
-            {/* Reduced segments */}
-            <meshBasicMaterial color="#8B4513" /> {/* Using basic material */}
+            <cylinderGeometry args={[0.01, 0.01, 0.1, 6]} />
+            <meshBasicMaterial color="#8B4513" />
           </mesh>
           <mesh position={[0, 0.1, 0]}>
-            <coneGeometry args={[0.05, 0.1, 6]} /> {/* Reduced segments */}
-            <meshBasicMaterial color="#228B22" /> {/* Using basic material */}
+            <coneGeometry args={[0.05, 0.1, 6]} />
+            <meshBasicMaterial color="#228B22" />
           </mesh>
         </group>
       ))}
     </>
   );
 }
-
 function Ocean() {
   return (
     <mesh>
-      <sphereGeometry args={[0.99, 16, 16]} />{" "}
-      {/* Reduced geometry complexity */}
-      <meshBasicMaterial color="#4682B4" transparent opacity={0.6} />{" "}
-      {/* Using basic material */}
+      <sphereGeometry args={[0.99, 16, 16]} />
+      <meshBasicMaterial color="#4682B4" transparent opacity={0.6} />
     </mesh>
   );
 }
 
 function Model() {
-  const gltf = useLoader(GLTFLoader, MODEL_URL);
-  const { scene, animations } = gltf;
+  const { scene, animations } = useGLTF(MODEL_URL);
   const { camera } = useThree();
-  const modelRef = useRef();
-  const mixerRef = useRef();
+  const modelRef = useRef<THREE.Object3D>(null);
+  const mixerRef = useRef<THREE.AnimationMixer | null>(null);
 
   useEffect(() => {
     if (!animations || animations.length === 0) return;
@@ -126,8 +119,7 @@ function Model() {
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.8} />{" "}
-      {/* Increased light intensity to compensate for basic materials */}
+      <ambientLight intensity={0.8} />
       <directionalLight position={[5, 5, 5]} intensity={1.2} />
       <Ocean />
       <EarthIsland />
@@ -161,7 +153,7 @@ export default function Loading() {
         <div className="w-full h-[80vh] flex items-center justify-center">
           <div className="w-full max-w-[600px] h-full">
             <Canvas
-              camera={{ position: [0, 1.4, 3.2], fov: 100 }}
+              camera={{ position: [0, 1.4, 3.2], fov: 50 }}
               className="w-full h-full"
             >
               <Suspense fallback={null}>
@@ -181,7 +173,7 @@ export default function Loading() {
       ) : (
         <SimpleFallback />
       )}
-      <div className="text-2xl mt-4 absolute bottom-1" aria-live="polite">
+      <div className="text-2xl mt-4 absolute bottom-10" aria-live="polite">
         Loading...
       </div>
     </div>
