@@ -5,10 +5,18 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
 import * as THREE from "three";
 
-// Preload the model
+// Preload the model - but only on client side
 const MODEL_URL =
   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/model_run-vUsBDzUhyOSsoJtmL0SNpEZrARCEhX.glb";
-useGLTF.preload(MODEL_URL);
+
+// Move preload inside a client-only component
+function PreloadModel() {
+  useEffect(() => {
+    useGLTF.preload(MODEL_URL);
+  }, []);
+
+  return null;
+}
 
 function EarthIsland() {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -65,6 +73,7 @@ function Trees() {
     </>
   );
 }
+
 function Ocean() {
   return (
     <mesh>
@@ -151,9 +160,10 @@ export default function Loading() {
     <div className="h-screen w-full flex flex-col items-center justify-center bg-transparent">
       {isClient ? (
         <div className="w-full h-[80vh] flex items-center justify-center">
+          <PreloadModel />
           <div className="w-full max-w-[600px] h-full">
             <Canvas
-              camera={{ position: [0, 1.4, 3.2], fov: 100 }}
+              camera={{ position: [0, 1.4, 3.2], fov: 50 }}
               className="w-full h-full"
             >
               <Suspense fallback={null}>
