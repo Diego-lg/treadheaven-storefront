@@ -80,9 +80,9 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Product Image */}
+      {/* Product Image - Hidden on mobile, visible on sm screens and up */}
       <div
-        className={`absolute right-0 bottom-0 w-[70%] sm:w-[60%] md:w-1/2 lg:w-[45%] h-1/3 xs:h-[40%] sm:h-1/2 md:h-[60%] lg:h-full transition-all duration-1000 delay-300 ${
+        className={`absolute right-0 bottom-0 hidden sm:block w-[60%] md:w-1/2 lg:w-[45%] h-1/2 md:h-[60%] lg:h-full transition-all duration-1000 delay-300 ${
           isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20"
         }`}
       >
@@ -90,11 +90,11 @@ const Hero: React.FC = () => {
           <img
             src="assets/nike.png"
             alt="Minimalist product"
-            className="absolute bottom-0 right-0 h-full w-full object-contain xs:object-cover object-right-bottom"
+            className="absolute bottom-0 right-0 h-full w-full object-contain sm:object-cover object-right-bottom"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent 
-                        xs:from-white xs:via-white/80 xs:to-transparent 
+            className="absolute inset-0 bg-gradient-to-r 
+                        from-white via-white/80 to-transparent 
                         sm:from-white sm:via-white/70 sm:to-transparent 
                         md:bg-gradient-to-t md:from-transparent md:to-transparent"
           ></div>
