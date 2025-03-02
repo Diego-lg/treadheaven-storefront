@@ -1,10 +1,11 @@
+import Image from "next/image";
 import React from "react";
 
 function Hero({}) {
   return (
     <div className="relative">
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/assets/background.png"
           alt="Hero background"
           className="w-full h-full object-cover"

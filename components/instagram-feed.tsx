@@ -1,5 +1,6 @@
 import React from "react";
 import { Instagram } from "lucide-react";
+import Image from "next/image";
 
 const instagramPosts = [
   {
@@ -88,7 +89,7 @@ function InstagramFeed({ posts = instagramPosts }: InstagramFeedProps) {
               rel="noopener noreferrer"
               className="group relative aspect-w-1 aspect-h-1 block overflow-hidden"
             >
-              <img
+              <Image
                 src={post.image}
                 alt="Instagram post"
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"

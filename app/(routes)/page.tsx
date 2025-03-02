@@ -1,7 +1,7 @@
 import getBillboards from "@/actions/get-billboards";
 import getProducts from "@/actions/get-products";
-import getBillboard from "@/actions/get-billboard"; // Added missing import
-import Billboard from "@/components/billboard";
+// import getBillboard from "@/actions/get-billboard"; // Added missing import
+//import Billboard from "@/components/billboard";
 import ProductList from "@/components/product-list";
 import Container from "@/components/ui/container";
 import Hero from "@/components/hero-section";
@@ -14,10 +14,12 @@ export const revalidate = 0;
 const HomePage = async () => {
   const products = await getProducts({ isFeatured: true });
   const billboards = await getBillboards(); // Fetch all billboards
-  const billboardData = await getBillboard(
+  {
+    /*  const billboardData = await getBillboard(
     "bba58e30-d31a-404b-898c-c92154a8f133"
   ); // Keep fetching single billboard for hero section
-
+*/
+  }
   return (
     <>
       <Container fullWidth>

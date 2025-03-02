@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Billboard as BillboardType } from "@/types";
+import Image from "next/image";
 
 interface CategorySectionProps {
   billboards?: BillboardType[];
@@ -20,7 +21,7 @@ function CategorySection({ billboards = [] }: CategorySectionProps) {
               className="group relative overflow-hidden rounded-lg"
             >
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
                   src={billboard.imageUrl}
                   alt={billboard.label || "Category image"}
                   className="w-full h-full object-center object-cover group-hover:scale-105 transition-transform duration-300"
