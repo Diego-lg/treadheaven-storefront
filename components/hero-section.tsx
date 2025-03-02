@@ -8,7 +8,9 @@ function Hero({}) {
         <Image
           src="/assets/background.png"
           alt="Hero background"
-          className="w-full h-full object-cover"
+          priority
+          className="object-cover"
+          fill
         />
         <div className="absolute inset-0 bg-gray-900 bg-opacity-40"></div>
       </div>

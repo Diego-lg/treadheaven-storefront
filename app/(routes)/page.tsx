@@ -8,6 +8,7 @@ import Hero from "@/components/hero-section";
 import CategorySection from "@/components/category-section";
 import Features from "@/components/features";
 import InstagramFeed from "@/components/instagram-feed";
+import Roadmap from "@/components/roadmap";
 
 export const revalidate = 0;
 
@@ -38,7 +39,9 @@ const HomePage = async () => {
       </Container>
       <Container fullWidth>
         {" "}
-        <Features /> <InstagramFeed />
+        <Roadmap />
+        <InstagramFeed />
+        <Features />
       </Container>
     </>
   );

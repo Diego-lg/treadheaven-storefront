@@ -25,6 +25,8 @@ function CategorySection({ billboards = [] }: CategorySectionProps) {
                   src={billboard.imageUrl}
                   alt={billboard.label || "Category image"}
                   className="w-full h-full object-center object-cover group-hover:scale-105 transition-transform duration-300"
+                  width={500}
+                  height={500}
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70"></div>
